@@ -25,7 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return "yeni kurs yaratma formu";
+        return view('courses.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        return "yeni kursu kaydetme işlemi";
+        $request->validate([
+            'name' => 'required|string|max:200',
+            'lecturers' => 'nullable|string|max:200',
+            'available_seats' => 'required|numeric|min:0',
+        ]);
+
+        //  yeni bir Course yaratalım
+        $course = new Course;
+        $course->name = $request->name;
+        $course->lecturers = $request->lecturers;
+        $course->available_seats = $request->available_seats;
+        $course->save();
+        return redirect()->route('courses.show', $course);
     }
 
     /**
@@ -58,7 +70,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        return view('courses.edit', compact('course'));
     }
 
     /**
@@ -70,7 +82,17 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:200',
+            'lecturers' => 'nullable|string|max:200',
+            'available_seats' => 'required|numeric|min:0',
+        ]);
+
+        $course->name = $request->name;
+        $course->lecturers = $request->lecturers;
+        $course->available_seats = $request->available_seats;
+        $course->save();
+        return redirect()->route('courses.show', $course);
     }
 
     /**
@@ -81,6 +103,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()->route('courses.index');
     }
 }

@@ -3,9 +3,11 @@
 @section('content')
 <ul>
     @foreach($courses as $course)
-    <a href="{{ route('courses.show', $course) }}">
-        {{ $course->name }}
-    </a>
+    <li>
+        <a href="{{ route('courses.show', $course) }}">
+            {{ $course->name }}
+        </a>
+    </li>
     @endforeach
 </ul>
 @endsection

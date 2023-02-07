@@ -11,6 +11,7 @@
             font-family: sans-serif;
             background-color: #fffaf0;
             color: #212121;
+            font-size: 2rem;
         }
 
         .container {
@@ -26,6 +27,7 @@
     <div class="container">
         <nav>
             <a href="{{ route('courses.index') }}">Kurslar</a>
+            <a href="{{ route('courses.create') }}">Yeni Kurs Ekle</a>
         </nav>
         <hr>
         @yield('content')
