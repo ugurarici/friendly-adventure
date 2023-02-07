@@ -1,5 +1,11 @@
+@extends('layouts.app')
+
+@section('content')
 <ul>
     @foreach($courses as $course)
-    {{ $course->name }}
+    <a href="{{ route('courses.show', $course) }}">
+        {{ $course->name }}
+    </a>
     @endforeach
 </ul>
+@endsection
